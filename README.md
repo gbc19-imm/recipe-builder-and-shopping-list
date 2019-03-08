@@ -11,6 +11,7 @@ A simple shopping list (and eventual... maybe) recipe builder.
 - Map the data to formatted HTML
 - Output the data into the document
 - Colourized the categories using CSS
+- Filtering by category
 
 ## Work To Do
 - Turn category variables into an array
@@ -18,6 +19,6 @@ A simple shopping list (and eventual... maybe) recipe builder.
 - Add new items to the set
 - Make items clickable to signify they have been purchased
 - Make quantitied updatable
-- Other filtering and sorting options
 - More efficient output
-
+- Make filtering more efficient
+    - Add other filtering and sorting options

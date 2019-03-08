@@ -6,12 +6,18 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <link rel="stylesheet" href="css/reset.css"> -->
+    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/main.css">
   </head>
   <body>
 
     <h1>Shopping List</h1>
+    <ul class="filters">
+      <li><button type="button" id="filterAll">All Items</button></li>
+      <li><button type="button" id="filterFruit" class="fruit">Fruits</button></li>
+      <li><button type="button" id="filterVeg" class="veg">Vegetables</button></li>
+      <li><button type="button" id="filterDry" class="dry">Dry Goods</button></li>
+    </ul>
     <ul id="shoppinglist"></ul>
 
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->

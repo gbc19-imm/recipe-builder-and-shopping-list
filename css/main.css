@@ -1,3 +1,4 @@
+.filters li { display:inline-block; }
 .fruit { background-color: tomato; }
 .veg { background-color: dodgerblue; }
 .dry { background-color: gold; }
