@@ -1,4 +1,4 @@
-const fruits = document.getElementById(`fruits`);
+const shopping = document.getElementById(`shoppinglist`);
 const vegetables = document.getElementById(`vegetables`);
 const drygoods = document.getElementById(`drygoods`);
 
@@ -16,19 +16,8 @@ const shoppingList = [
 ];
 
 
-fruits.innerHTML = shoppingList
-                    .filter(item => item.cat == FRUIT)
-                    .map(item => `<li>I need ${item.qty} ${item.name}.</li>`)
-                    .join('');
+let fruit = shoppingList.filter(item => item.cat == FRUIT).map(item => `<li class="fruit">${item.qty} ${item.name}</li>`).join('');
+let veg = shoppingList.filter(item => item.cat == VEG).map(item => `<li class="veg">${item.qty} ${item.name}</li>`).join('');
+let dry = shoppingList.filter(item => item.cat == DRY).map(item => `<li class="dry">${item.qty} ${item.name}</li>`).join('');
 
-vegetables.innerHTML = shoppingList
-                    .filter(item => item.cat == VEG)
-                    .map(item => `<li>I need ${item.qty} ${item.name}.</li>`)
-                    .join('');
-
-drygoods.innerHTML = shoppingList
-                    .filter(item => item.cat == DRY)
-                    .map(item => `<li>I need ${item.qty} ${item.name}.</li>`)
-                    .join('');
-
-
+shopping.innerHTML = fruit + veg + dry;
