@@ -11,19 +11,30 @@
   </head>
   <body>
 
-    <h1>Shopping List</h1>
-    <form id="newItem">
-      <label for="item">New Item</label>
-      <input type="text" name="item" id="item">
-      <input type="submit" value="Add">
-    </form>
-    <ul class="filters">
-      <li><button type="button" id="filterAll">All Items</button></li>
-      <li><button type="button" id="filterFruit" class="fruit">Fruits</button></li>
-      <li><button type="button" id="filterVeg" class="veg">Vegetables</button></li>
-      <li><button type="button" id="filterDry" class="dry">Dry Goods</button></li>
-    </ul>
-    <ul id="shoppinglist"></ul>
+    <main class="layout">
+      <header class="header">
+        <h1>Shopping List</h1>
+      </header>
+
+      <form id="newItem" class="newitem" autocomplete="off">
+        <label for="item" class="line-label">New Item</label>
+        <div class="addnew">
+          <input type="text" name="item" id="item" class="form-component inpt" placeholder="What do you need?">
+          <input type="submit" value="Add" class="form-component btn">
+        </div>
+      </form>
+
+      <form id="filterCategories">
+        <ul class="filters">
+          <li><input type="radio" name="category" value="all" id="filterAll" checked><label for="filterAll">All</label></li>
+          <li><input type="radio" name="category" value="fruit" id="filterFruit"><label for="filterFruit">Fruits</label></li>
+          <li><input type="radio" name="category" value="veg" id="filterVeg"><label for="filterVeg">Vegetables</label></li>
+          <li><input type="radio" name="category" value="dry" id="filterDry"><label for="filterDry">Dry Goods</label></li>
+        </ul>
+      </form>
+
+      <ul id="shoppinglist" class="shoppinglist"></ul>
+    </main>
 
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
     <script src="js/main.js"></script>

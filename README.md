@@ -15,13 +15,17 @@ A simple shopping list (and eventual... maybe) recipe builder.
 
 ### March 15, 2019
 - Add new items to the shopping list
+- Make filtering more efficient
+    - Change filtering to radio buttons (or store settings in an object) so they don't get ignored on reprint
+- Made it prettier
+
 
 ## Work To Do
-- Make this prettier!!
 - Turn category variables into an array
     - May _could_ modify the data set to include categories
+    - Create UI options from the Array
 - Make items clickable to signify they have been purchased
 - Make quantitied updatable (stepper, or swipe?)
-- Make filtering more efficient
-    - Add other filtering and sorting options
-    - Change filtering to radio buttons (or store settings in an object) so they don't get ignored on reprint
+- Sort the list somehow
+- Validate the input, show an error
+- Click uncategorized to slide out a category selection
