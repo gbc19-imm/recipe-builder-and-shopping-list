@@ -1,6 +1,7 @@
 const shopping = document.getElementById(`shoppinglist`);
 const vegetables = document.getElementById(`vegetables`);
 const drygoods = document.getElementById(`drygoods`);
+const newitemform = document.getElementById(`newItem`);
 
 const FRUIT = `fruit`;
 const VEG = `veg`;
@@ -22,6 +23,36 @@ function printList(theArrayToPrint = shoppingList) {
     // Format and output whatever it was told to print (theArrayToPrint)
     shopping.innerHTML = theArrayToPrint.map(item => `<li class="${item.cat}">${item.name} (${item.qty})</li>`).join('')
 }
+
+newitemform.addEventListener('submit', event => {
+    // The form was submit, stop the refreshing of the page
+    event.preventDefault();
+
+    // Get the text from the field
+    let groceryItem = newitemform.item.value;
+    // console.log(`I need to buy: ${groceryItem}`);
+    
+    // Clear the text from the field (so we can add a new item again later)
+    newitemform.item.value = '';
+
+    // Push it into our dataset (Array: shoppingList)
+    shoppingList.push(
+        { name: groceryItem, qty: 0, cat: false }
+    );
+
+    // Re-print the list
+    printList();
+
+});
+
+
+
+
+
+
+
+
+
 
 // BUTTON FILTERS //////////////////////////////////////////////
 // Each button that needs to be a filter needs its own click listener
