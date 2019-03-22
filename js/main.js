@@ -51,9 +51,17 @@ newitemform.addEventListener('submit', event => {
     // Force focus the input field in case we want to add more
     newitemform.item.focus();
 
+    // Store the category that is currently selected (from filter form)
+    let defaultCategory = filterForm.category.value;
+
+    // If the category selected doesn't exist (ex, "all"), default category to: false
+    if (defaultCategory == "all")
+        defaultCategory = false;
+
+    // Use the current filter category as the default for any new items added
     // Push it into our dataset (Array: shoppingList)
     // Default to 0 quantity, and no category
-    shoppingList.push( { name: groceryItem, qty: 0, cat: false } );
+    shoppingList.push( { name: groceryItem, qty: 0, cat: defaultCategory } );
 
     // Print the list
     printList();
@@ -68,13 +76,25 @@ filterForm.addEventListener('click', event => {
     // If NOT an input (radio button), then "return" (quit immediately)
     if (!event.target.matches('input')) return;
 
+    // We know for sure it was an input (radio), find out the value and set it to localstorage
+    window.localStorage.setItem('category', filterForm.category.value);
+
     // Must be a radio button if we got this far. Go ahead and print
     printList();
 })
 
 
+// REMINDER: Ensure that all of this happens on page load.
+
+// Before I print the list when the page first loads up: check if there was a category set
+// REMINDER: Deal with the scenario where no category was set!
+var theCategory = window.localStorage.getItem('category');
+console.log(theCategory);
+
+// Find the radio button that matches the category and set it to "checked"
+document.querySelector(`input[value="${theCategory}"]`).setAttribute('checked', 'checked');
 
 // PRINT THE LIST WHEN THE PAGE LOADS //////////////////////////////////
 // Default to the WHOLE list when a user arrives at the page
 // Could also do this using a document load event
-printList()
+printList();
