@@ -8,29 +8,25 @@ const FRUIT = `fruit`;
 const VEG = `veg`;
 const DRY = `dry`;
 
-const shoppingList = [
-    { name: `apples`, qty: 3, cat: FRUIT },
-    { name: `bananas`, qty: 0, cat: FRUIT },
-    { name: `cucumbers`, qty: 3, cat: VEG },
-    { name: `strawberries`, qty: 10, cat: FRUIT },
-    { name: `kraft dinner`, qty: 0, cat: DRY },
-    { name: `eggplant`, qty: 2, cat: VEG },
-];
 
+let shoppingList;
 
 
 // GENERIC PRINTER //////////////////////////////////////////////
 // Will clear out the current list to replace with a new list
 function printList(theArrayToPrint = shoppingList) {
-    // If no list was supplied, use the entire shoppingList
+    
     // Format and output whatever it was told to print (theArrayToPrint)
 
+    // Get the current filter value, so that we only print based on that value set
     let catToShow = filterForm.category.value;
 
+    // If no list was supplied, use the entire shoppingList
     if ( catToShow != 'all' )
         theArrayToPrint = theArrayToPrint.filter(item => item.cat == catToShow)
 
-    shopping.innerHTML = theArrayToPrint.map(item => `<li class="${item.cat}">${item.qty} ${item.name}</li>`).join('')
+    // Add the entire list of <li> items to the document
+    shopping.innerHTML = theArrayToPrint.map(item => `<li class="${item.cat}">${item.qty} ${item.name}</li>`).join('');
 }
 
 
@@ -63,6 +59,9 @@ newitemform.addEventListener('submit', event => {
     // Default to 0 quantity, and no category
     shoppingList.push( { name: groceryItem, qty: 0, cat: defaultCategory } );
 
+    // Save our shoppingList to the browser
+    window.localStorage.setItem('shoppingList', JSON.stringify(shoppingList));
+
     // Print the list
     printList();
 });
@@ -84,17 +83,32 @@ filterForm.addEventListener('click', event => {
 })
 
 
-// REMINDER: Ensure that all of this happens on page load.
 
-// Before I print the list when the page first loads up: check if there was a category set
-// REMINDER: Deal with the scenario where no category was set!
-var theCategory = window.localStorage.getItem('category');
-console.log(theCategory);
+// WHEN THE WINDOW HAS LOADED ALL OF ITS VARIABLES, ETC... ////////////
+window.addEventListener('load', event => {
 
-// Find the radio button that matches the category and set it to "checked"
-document.querySelector(`input[value="${theCategory}"]`).setAttribute('checked', 'checked');
+    // const shoppingList = [
+    //     { name: `apples`, qty: 3, cat: FRUIT },
+    //     { name: `bananas`, qty: 0, cat: FRUIT },
+    //     { name: `cucumbers`, qty: 3, cat: VEG },
+    //     { name: `strawberries`, qty: 10, cat: FRUIT },
+    //     { name: `kraft dinner`, qty: 0, cat: DRY },
+    //     { name: `eggplant`, qty: 2, cat: VEG },
+    // ];
 
-// PRINT THE LIST WHEN THE PAGE LOADS //////////////////////////////////
-// Default to the WHOLE list when a user arrives at the page
-// Could also do this using a document load event
-printList();
+    // Load up date from localStorage. If no data was 
+    shoppingList = JSON.parse(window.localStorage.getItem('shoppingList')) || [];
+
+    // Before we print the list for the first time, check if there was a category that we left off with
+    // If no category was set, default to "all"
+    var theCategory = window.localStorage.getItem('category') || `all`;
+
+    // Find the radio button that matches the category and set it to "checked"
+    document.querySelector(`input[value="${theCategory}"]`).setAttribute('checked', 'checked');
+
+    // PRINT THE LIST WHEN THE PAGE LOADS //////////////////////////////////
+    // Default to the WHOLE list when a user arrives at the page
+    printList();
+
+});
+
