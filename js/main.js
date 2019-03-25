@@ -123,15 +123,6 @@ function printFilters(allcats = categories) {
 // WHEN THE WINDOW HAS LOADED ALL OF ITS VARIABLES, ETC... ////////////
 window.addEventListener('load', event => {
 
-    // const shoppingList = [
-    //     { name: `apples`, qty: 3, cat: FRUIT },
-    //     { name: `bananas`, qty: 0, cat: FRUIT },
-    //     { name: `cucumbers`, qty: 3, cat: VEG },
-    //     { name: `strawberries`, qty: 10, cat: FRUIT },
-    //     { name: `kraft dinner`, qty: 0, cat: DRY },
-    //     { name: `eggplant`, qty: 2, cat: VEG },
-    // ];
-
     // Load up date from localStorage. If no data was 
     shoppingList = JSON.parse(window.localStorage.getItem('shoppingList')) || [];
 
