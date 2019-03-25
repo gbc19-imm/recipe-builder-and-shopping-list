@@ -4,12 +4,13 @@ const drygoods = document.getElementById(`drygoods`);
 const newitemform = document.getElementById(`newItem`);
 const filterForm = document.getElementById(`filterCategories`)
 
-const FRUIT = `fruit`;
-const VEG = `veg`;
-const DRY = `dry`;
-
-
 let shoppingList;
+const categories = {
+    all: false,
+    fruit: true,
+    veg: true,
+    dry: true,
+}
 
 
 // GENERIC PRINTER //////////////////////////////////////////////
@@ -80,7 +81,14 @@ filterForm.addEventListener('click', event => {
 
     // Must be a radio button if we got this far. Go ahead and print
     printList();
-})
+});
+
+
+
+//Print filters from an object
+function printFilters(allcats = categories) {
+    document.querySelector('.filters').innerHTML = Object.keys(allcats).map((cat, i) => `<li><input type="radio" name="category" value="${cat}" id="filter${i}"><label for="filter${i}">${cat}</label></li>`).join('');
+}
 
 
 
@@ -98,6 +106,9 @@ window.addEventListener('load', event => {
 
     // Load up date from localStorage. If no data was 
     shoppingList = JSON.parse(window.localStorage.getItem('shoppingList')) || [];
+
+    // Add all the filters
+    printFilters();
 
     // Before we print the list for the first time, check if there was a category that we left off with
     // If no category was set, default to "all"
