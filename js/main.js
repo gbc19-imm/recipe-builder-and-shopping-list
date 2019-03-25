@@ -1,10 +1,16 @@
+// Select all of the necessary dom elements
 const shopping = document.getElementById(`shoppinglist`);
 const vegetables = document.getElementById(`vegetables`);
 const drygoods = document.getElementById(`drygoods`);
 const newitemform = document.getElementById(`newItem`);
 const filterForm = document.getElementById(`filterCategories`)
 
+// Array will hold all off the shopping list items
 let shoppingList;
+
+// Store all the valid categories
+// true categories are actual valid categories, `all` is false because it's just a filter
+// This isn't implemented, but could be handy down the road.
 const categories = {
     all: false,
     fruit: true,
@@ -37,7 +43,19 @@ function printList(theArrayToPrint = shoppingList) {
 }
 
 
+
+// CATEGORY FILTER PRINTER ////////////////////////////////////////
+//Print filters from an object
+function printFilters(allcats = categories) {
+    document.querySelector('.filters').innerHTML = Object.keys(allcats).map((cat, i) => `<li><input type="radio" name="category" value="${cat}" id="filter${i}"><label for="filter${i}">${cat}</label></li>`).join('');
+}
+
+
+
+// +/- QUANTITY NEEDED ///////////////////////////////////////////
+// When the shopping list is clicked, check if it was an +/- button
 shopping.addEventListener('click', event => {
+    // If not a button, leave the function immediately (return)
     if (!event.target.matches('button') || !event.target.dataset.id) return;
 
     // Which item are we updating?
@@ -56,7 +74,7 @@ shopping.addEventListener('click', event => {
 
     // Print the list
     printList();
-})
+});
 
 
 
@@ -113,14 +131,8 @@ filterForm.addEventListener('click', event => {
 
 
 
-//Print filters from an object
-function printFilters(allcats = categories) {
-    document.querySelector('.filters').innerHTML = Object.keys(allcats).map((cat, i) => `<li><input type="radio" name="category" value="${cat}" id="filter${i}"><label for="filter${i}">${cat}</label></li>`).join('');
-}
-
-
-
-// WHEN THE WINDOW HAS LOADED ALL OF ITS VARIABLES, ETC... ////////////
+// STARTUP THE APPLICATION ///////////////////////////////////////////
+// When the window is loaded, start the application!
 window.addEventListener('load', event => {
 
     // Load up date from localStorage. If no data was 
@@ -141,4 +153,3 @@ window.addEventListener('load', event => {
     printList();
 
 });
-
