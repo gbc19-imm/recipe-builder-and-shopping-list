@@ -27,8 +27,36 @@ function printList(theArrayToPrint = shoppingList) {
         theArrayToPrint = theArrayToPrint.filter(item => item.cat == catToShow)
 
     // Add the entire list of <li> items to the document
-    shopping.innerHTML = theArrayToPrint.map(item => `<li class="${item.cat}">${item.qty} ${item.name}</li>`).join('');
+    shopping.innerHTML = theArrayToPrint.map(item => `
+        <li class="${item.cat}">
+            <button data-id="${item.id}" data-step="-1">-</button>
+            <span>${item.qty} ${item.name}</span>
+            <button data-id="${item.id}" data-step="1">+</button>
+        </li>
+    `).join('');
 }
+
+
+shopping.addEventListener('click', event => {
+    if (!event.target.matches('button') || !event.target.dataset.id) return;
+
+    // Which item are we updating?
+    const updateId = parseInt(event.target.dataset.id);
+
+    // Add 1 or subtract 1?
+    const step = parseInt(event.target.dataset.step);
+
+    // Update the quantity based on the step value
+    // If the quantity will end up less than 0, fail the block (won't reach the second step: the update)
+    { (shoppingList[shoppingList.findIndex(item => item.id === updateId)].qty + step >= 0) && 
+        (shoppingList[shoppingList.findIndex(item => item.id === updateId)].qty += step) }
+
+    // Save our shoppingList to the browser
+    window.localStorage.setItem('shoppingList', JSON.stringify(shoppingList));
+
+    // Print the list
+    printList();
+})
 
 
 
@@ -58,7 +86,7 @@ newitemform.addEventListener('submit', event => {
     // Use the current filter category as the default for any new items added
     // Push it into our dataset (Array: shoppingList)
     // Default to 0 quantity, and no category
-    shoppingList.push( { name: groceryItem, qty: 0, cat: defaultCategory } );
+    shoppingList.push( { id: shoppingList.length, name: groceryItem, qty: 1, cat: defaultCategory } );
 
     // Save our shoppingList to the browser
     window.localStorage.setItem('shoppingList', JSON.stringify(shoppingList));
