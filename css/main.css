@@ -95,10 +95,6 @@ h1 {
 .shoppinglist li button:last-child { text-align: right; }
 
 
-input[value="Add"] {
-    background-color: red;
-}
-
 
 
 
